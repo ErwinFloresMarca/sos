@@ -1,0 +1,8 @@
+{
+  "name": "sos",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue",
+  "id": "74d00931"
+}
