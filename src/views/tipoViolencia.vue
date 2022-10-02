@@ -1,24 +1,27 @@
 <template>
-  <BaseIonicPage title="Tipo de violencia">
-    <h4>{{tipoViolencia.titulo}}</h4>
-    <img
-      class="w-full img-tipo-violencia"
-      :src="tipoViolencia.img"
-      alt="error"
-    />
-  </BaseIonicPage>
+  <ion-page>
+    <ion-content class="ion-padding">
+      <h4>{{ tipoViolencia.titulo }}</h4>
+      <img
+        class="w-full img-tipo-violencia"
+        :src="tipoViolencia.img"
+        alt="error"
+      />
+    </ion-content>
+  </ion-page>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-  name: 'TipoViolencia'
+  name: "TipoViolencia",
 };
 </script>
 
-<script setup>
-import BaseIonicPage from '@/components/BaseIonicPage'
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+<script setup lang="ts">
+import { IonPage, IonContent } from "@ionic/vue";
+
+import { computed } from "vue";
+import { useRoute } from "vue-router";
 
 const tiposDeViolencia = [
   {
@@ -74,10 +77,17 @@ const tiposDeViolencia = [
 ];
 
 const route = useRoute();
-const tipoViolencia = computed({
+const tipoViolencia = computed<any>({
   get: () => {
-    return tiposDeViolencia.find((tp) => tp.id == parseInt(route.params.id)) || {};
-  }
+    return (
+      tiposDeViolencia.find((tp) =>
+        route.params.id
+          ? tp.id == parseInt(route.params.id.toString())
+          : undefined
+      ) || {}
+    );
+  },
+  set: (val) => val,
 });
 </script>
 
