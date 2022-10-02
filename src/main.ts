@@ -23,9 +23,28 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+/** PrimeVue */
+import PrimeVue from 'primevue/config';
+import ToastService from 'primevue/toastservice';
+import 'primevue/resources/primevue.min.css';
+import 'primevue/resources/themes/lara-light-indigo/theme.css';
+import 'primeflex/primeflex.css';
+import 'primeicons/primeicons.css';
+import Tooltip from 'primevue/tooltip';
+// Custom directives
+import rolesDirective from './directives/roles.directive';
+import authDirective from './directives/auth.directive';
+
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
+// Use primevue
+  app.directive('tooltip', Tooltip);
+  app.use(PrimeVue).use(ToastService);
+
+// directives
+  app.directive('roles', rolesDirective);
+  app.directive('auth', authDirective);
   
 router.isReady().then(() => {
   app.mount('#app');

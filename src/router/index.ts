@@ -5,27 +5,35 @@ import TabsPage from '../views/TabsPage.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/tabs/tab1'
+    redirect: '/app',
+    children: [
+      
+    ]
   },
   {
-    path: '/tabs/',
+    path: '/app',
     component: TabsPage,
+    redirect: '/app/home',
     children: [
       {
-        path: '',
-        redirect: '/tabs/tab1'
+        name: 'Home',
+        path: 'home',
+        component: () => import('../views/HomePage.vue')
       },
       {
-        path: 'tab1',
-        component: () => import('@/views/Tab1Page.vue')
+        name: 'TipoViolencia',
+        path: 'tipo-violencia/:id',
+        component: () => import('../views/tipoViolencia.vue')
       },
       {
-        path: 'tab2',
-        component: () => import('@/views/Tab2Page.vue')
+        name: 'LineasDeOrientacion',
+        path: 'lineas-de-orientacion',
+        component: () => import('../views/lineasDeOrientacion.vue')
       },
       {
-        path: 'tab3',
-        component: () => import('@/views/Tab3Page.vue')
+        name: 'LineasDeEmergencia',
+        path: 'lineas-de-emergencia',
+        component: () => import('../views/lineasDeEmergencia.vue')
       }
     ]
   }
