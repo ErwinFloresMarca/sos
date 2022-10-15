@@ -3,17 +3,13 @@
     <ion-menu type="overlay" content-id="main-content">
       <ion-header>
         <ion-toolbar>
-          <ion-title>Menu</ion-title>
+          <ion-title>MENU</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
         <auth-menu> </auth-menu>
         <ion-list>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
-          <ion-item>Menu Item</ion-item>
+          <ion-item>Preguntas frecuentes</ion-item>
         </ion-list>
       </ion-content>
     </ion-menu>

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <LoginModal ref="loginModal" @login="onLogin"></LoginModal>
+    <LoginModal ref="loginModalRef" @login="onLogin"></LoginModal>
+    <SignUpModal ref="signUpModelRef" @signup="onSigUp"></SignUpModal>
     <IonButton class="w-full" v-if="!auth.isLoggedIn" color="warning" @click="onSignIn">
       <ion-icon slot="start" :icon="personAddOutline"></ion-icon>
       REGISTRARSE
@@ -14,27 +15,94 @@
 </template>
 
 <script setup lang="ts">
-import { IonButton, IonIcon } from '@ionic/vue';
+import { IonButton, IonIcon, toastController } from '@ionic/vue';
 import useAuth from '@/store/auth';
 import UserAvatar from './UserAvatar.vue';
-import { logInOutline, personAddOutline } from 'ionicons/icons';
+import { checkmarkOutline, closeOutline, logInOutline, personAddOutline } from 'ionicons/icons';
 import LoginModal from '@/views/auth/LoginModal.vue';
+import SignUpModal from '@/views/auth/SignUpModal.vue';
 import { ref } from 'vue';
+import { Usuario } from '@/api/types';
+import useUsuarioApi from '@/api/modules/usuario';
+import { showToast } from '@/helpers/toast.helper';
 
-const loginModal = ref();
+const usuarioApi = useUsuarioApi();
+const loginModalRef = ref();
+const signUpModelRef = ref();
 
 const onSignIn = () => {
-  console.log('on sign in');
+  signUpModelRef.value?.open();
 };
 
 const onOpenLoginModal = () => {
-  loginModal.value?.open();
+  loginModalRef.value?.open();
 };
 
 const auth = useAuth();
 
-const onLogin = (data: { username: string; password: string }) => {
-  auth.login(data.username, data.password);
+const onLogin = async (data: { username: string; password: string }) => {
+  const logged = await auth.login(data.username, data.password);
+  if (logged) {
+    loginModalRef.value?.close();
+  }
+};
+
+const onSigUp = async (data: Usuario & { password: string; passwordConfirm: string }) => {
+  if (data.password !== data.passwordConfirm) {
+    const onError = await toastController.create({
+      color: 'danger',
+      duration: 3000,
+      message: 'La contraseñas no son iguales',
+      header: 'Error!',
+      icon: closeOutline,
+      position: 'bottom',
+      buttons: [
+        {
+          text: 'X',
+          role: 'cancel',
+        },
+      ],
+    });
+    onError.present();
+    return;
+  }
+  await usuarioApi
+    .create({ ...data, passwordConfirm: undefined })
+    .then(async (resp) => {
+      const onSuccess = await toastController.create({
+        color: 'success',
+        duration: 3000,
+        message: 'Registrado!',
+        icon: checkmarkOutline,
+        position: 'bottom',
+        buttons: [
+          {
+            text: 'X',
+            role: 'cancel',
+          },
+        ],
+      });
+      onSuccess.present();
+      signUpModelRef.value?.close();
+      auth.login(data.usuario, data.password);
+    })
+    .catch(async (err) => {
+      const onError = await toastController.create({
+        color: 'danger',
+        duration: 3000,
+        message: err.error.code,
+        header: 'Error!',
+        icon: closeOutline,
+        position: 'bottom',
+        buttons: [
+          {
+            text: 'X',
+            role: 'cancel',
+          },
+        ],
+      });
+      onError.present();
+    });
 };
 </script>
 

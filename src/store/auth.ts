@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import useAuthApi from '@/api/modules/auth';
-import useUserApi from '@/api/modules/user';
+import useUserApi from '@/api/modules/usuario';
 import router from '@/router';
 import { Usuario } from '@/api/types';
 import { ApiRol } from '@/types';
@@ -73,7 +73,7 @@ const useAuth = defineStore({
       this.user = undefined;
       this.token = undefined;
       this.isLoggedIn = false;
-      router.push('/login');
+      router.push('/');
     },
     //
     async getCantUsers(): Promise<number> {

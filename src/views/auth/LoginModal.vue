@@ -52,14 +52,20 @@ function onLogin() {
 }
 function cancel() {
   emit('cancel');
-  isOpen.value = false;
+  close();
 }
 function open() {
   isOpen.value = true;
 }
 
+function close() {
+  data.value = {};
+  isOpen.value = false;
+}
+
 defineExpose({
   open,
+  close,
 });
 </script>
 
