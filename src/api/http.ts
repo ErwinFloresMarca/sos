@@ -4,7 +4,7 @@ import { formatJsonToUrlParams, instanceObject } from '@/utils/format';
 import useAuth from '@/store/auth';
 import { showToast } from '@/helpers/toast.helper';
 
-const BASE_PREFIX = process.env.BASE_URL;
+const BASE_PREFIX = process.env.VUE_APP_API_URL;
 
 const useAxiosInstance = (): AxiosInstance => {
   const auth = useAuth();
