@@ -16,9 +16,7 @@ function decrypt(value: string): string {
 }
 
 const plugin = storePlugin({
-  stores: [
-    AUTH_STORE_KEY,
-  ],
+  stores: [AUTH_STORE_KEY],
   storage: localStorage,
   encrypt,
   decrypt,

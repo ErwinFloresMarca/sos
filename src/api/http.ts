@@ -39,13 +39,14 @@ const useAxiosInstance = (): AxiosInstance => {
       if (response.status < 300) {
         return response;
       }
-      if (response.status >= 400) showToast({message: JSON.stringify(response.status), type: 'error', closable: true});
+      if (response.status >= 400)
+        showToast({ message: JSON.stringify(response.status), type: 'error', closable: true });
       return response;
     },
     (error: AxiosError) => {
       const { response } = error;
       if (response) {
-        showToast({message: showCodeMessage(response.status), type: 'error', closable: true})
+        showToast({ message: showCodeMessage(response.status), type: 'error', closable: true });
         if (response.status === 401) {
           // eslint-disable-next-line no-shadow
           const auth = useAuth();
@@ -53,7 +54,11 @@ const useAxiosInstance = (): AxiosInstance => {
         }
         return Promise.reject(response.data);
       }
-      showToast({message: 'Conexión de red defectuosa, Por favor, inténtelo de nuevo más tarde!', type: 'warning', closable: true})
+      showToast({
+        message: 'Conexión de red defectuosa, Por favor, inténtelo de nuevo más tarde!',
+        type: 'warning',
+        closable: true,
+      });
       return Promise.reject(error);
     },
   );

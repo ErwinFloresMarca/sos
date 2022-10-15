@@ -7,7 +7,7 @@
           <ion-icon :icon="home" />
           <ion-label>Inicio</ion-label>
         </ion-tab-button>
-        
+
         <ion-tab-button tab="tab3" href="/app/lineas-de-emergencia">
           <ion-icon :icon="flag" />
           <ion-label>Lineas de emergencia</ion-label>
@@ -32,10 +32,10 @@ export default defineComponent({
   components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage, IonRouterOutlet },
   setup() {
     return {
-      alert, 
-      flag, 
+      alert,
+      flag,
       home,
-    }
-  }
+    };
+  },
 });
 </script>

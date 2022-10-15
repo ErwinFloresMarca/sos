@@ -1,5 +1,5 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue';
+import App from './App.vue';
 import router from './router';
 
 import { IonicVue } from '@ionic/vue';
@@ -27,7 +27,7 @@ import './theme/variables.css';
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 import 'primevue/resources/primevue.min.css';
-import 'primevue/resources/themes/lara-light-indigo/theme.css';
+import 'primevue/resources/themes/saga-orange/theme.css';
 import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import Tooltip from 'primevue/tooltip';
@@ -35,17 +35,17 @@ import Tooltip from 'primevue/tooltip';
 import rolesDirective from './directives/roles.directive';
 import authDirective from './directives/auth.directive';
 
-const app = createApp(App)
-  .use(IonicVue)
-  .use(router);
+import store from '@/store';
+
+const app = createApp(App).use(IonicVue).use(router).use(store);
 // Use primevue
-  app.directive('tooltip', Tooltip);
-  app.use(PrimeVue).use(ToastService);
+app.directive('tooltip', Tooltip);
+app.use(PrimeVue).use(ToastService);
 
 // directives
-  app.directive('roles', rolesDirective);
-  app.directive('auth', authDirective);
-  
+app.directive('roles', rolesDirective);
+app.directive('auth', authDirective);
+
 router.isReady().then(() => {
   app.mount('#app');
 });

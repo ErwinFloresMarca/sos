@@ -1,16 +1,16 @@
-import { defineStore } from "pinia";
-import useAuthApi from "@/api/modules/auth";
-import useUserApi from "@/api/modules/user";
-import router from "@/router";
-import { Usuario } from "@/api/types";
-import { ApiRol } from "@/types";
+import { defineStore } from 'pinia';
+import useAuthApi from '@/api/modules/auth';
+import useUserApi from '@/api/modules/user';
+import router from '@/router';
+import { Usuario } from '@/api/types';
+import { ApiRol } from '@/types';
 
 interface Auth {
   user?: Usuario;
   token?: string;
   isLoggedIn: boolean;
 }
-export const AUTH_STORE_KEY = "auth_store";
+export const AUTH_STORE_KEY = 'auth_store';
 const useAuth = defineStore({
   // id de estado
   id: AUTH_STORE_KEY,
@@ -25,7 +25,7 @@ const useAuth = defineStore({
   getters: {
     getUser: (state: Auth) => state.user,
     getToken: (state: Auth) => state.token,
-    islogged: (state: Auth) => state.isLoggedIn,
+    isLogged: (state: Auth) => state.isLoggedIn,
   },
   // pinia mutations actions
   actions: {
@@ -55,7 +55,7 @@ const useAuth = defineStore({
       const isLogin = await authApi
         .me()
         .then((resp: { data: Usuario }) => {
-          console.log("refresh me: ", resp);
+          console.log('refresh me: ', resp);
           if (this.user) {
             const userInfo: Usuario = { ...this.user };
             Object.assign(userInfo, resp.data);
@@ -73,7 +73,7 @@ const useAuth = defineStore({
       this.user = undefined;
       this.token = undefined;
       this.isLoggedIn = false;
-      router.push("/login");
+      router.push('/login');
     },
     //
     async getCantUsers(): Promise<number> {

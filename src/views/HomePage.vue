@@ -25,7 +25,7 @@
 
 <script lang="ts">
 export default {
-  name: "HomePage",
+  name: 'HomePage',
 };
 </script>
 
@@ -33,27 +33,27 @@ export default {
 import { IonPage } from '@ionic/vue';
 
 // prime
-import Carousel from "primevue/carousel";
-import Button from "primevue/button";
-import { useRouter } from "vue-router";
+import Carousel from 'primevue/carousel';
+import Button from 'primevue/button';
+import { useRouter } from 'vue-router';
 
 const tiposDeViolencia = [
   {
     id: 1,
-    img: "/imgs/violenciaFisicaSpicologica.webp",
-    titulo: "VIOLENCIA FISICA Y PSICOLOGICA",
-    descripcion: "texto",
-    ejemplos: ["ejemplo 1", "ejemplo 2", "ejemplo 3"],
-    pasos: ["paso 1", "paso 2", "paso 3"],
+    img: '/imgs/violenciaFisicaSpicologica.webp',
+    titulo: 'VIOLENCIA FISICA Y PSICOLOGICA',
+    descripcion: 'texto',
+    ejemplos: ['ejemplo 1', 'ejemplo 2', 'ejemplo 3'],
+    pasos: ['paso 1', 'paso 2', 'paso 3'],
     contactos: [
       {
-        tipos: "Lineas de emergencia",
+        tipos: 'Lineas de emergencia',
         instituciones: [
           {
-            nombre: "inst 1",
-            objetivo: "Hospital",
-            direccion: "direccion",
-            telefono: "356413",
+            nombre: 'inst 1',
+            objetivo: 'Hospital',
+            direccion: 'direccion',
+            telefono: '356413',
             ubicación: {
               lat: 0.7645,
               long: 0.7654,
@@ -65,20 +65,20 @@ const tiposDeViolencia = [
   },
   {
     id: 2,
-    img: "/imgs/otrasViolencias.png",
-    titulo: "VIOLENCIA OTRA",
-    descripcion: "texto",
-    ejemplos: ["ejemplo 1", "ejemplo 2", "ejemplo 3"],
-    pasos: ["paso 1", "paso 2", "paso 3"],
+    img: '/imgs/otrasViolencias.png',
+    titulo: 'VIOLENCIA OTRA',
+    descripcion: 'texto',
+    ejemplos: ['ejemplo 1', 'ejemplo 2', 'ejemplo 3'],
+    pasos: ['paso 1', 'paso 2', 'paso 3'],
     contactos: [
       {
-        tipos: "Lineas de emergencia",
+        tipos: 'Lineas de emergencia',
         instituciones: [
           {
-            nombre: "inst 1",
-            objetivo: "Hospital",
-            direccion: "direccion",
-            telefono: "356413",
+            nombre: 'inst 1',
+            objetivo: 'Hospital',
+            direccion: 'direccion',
+            telefono: '356413',
             ubicación: {
               lat: 0.7645,
               long: 0.7654,
@@ -92,7 +92,7 @@ const tiposDeViolencia = [
 const router = useRouter();
 const onClickTipoViolencia = (id: number) => {
   router.push({
-    name: "TipoViolencia",
+    name: 'TipoViolencia',
     params: {
       id: id,
     },

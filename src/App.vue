@@ -3,10 +3,11 @@
     <ion-menu type="overlay" content-id="main-content">
       <ion-header>
         <ion-toolbar>
-          <ion-title>Menu Content</ion-title>
+          <ion-title>Menu</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
+        <auth-menu> </auth-menu>
         <ion-list>
           <ion-item>Menu Item</ion-item>
           <ion-item>Menu Item</ion-item>
@@ -22,7 +23,7 @@
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
-          <ion-title>Titulo</ion-title>
+          <ion-title>{{ route.meta.title }}</ion-title>
           <ion-buttons slot="end">
             <ion-back-button default-href="/app"></ion-back-button>
           </ion-buttons>
@@ -36,9 +37,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue';
+import { useRoute } from 'vue-router';
 export default defineComponent({
-  name: "App",
+  name: 'App',
 });
 </script>
 
@@ -57,5 +59,8 @@ import {
   IonMenuButton,
   IonBackButton,
   IonPage,
-} from "@ionic/vue";
+} from '@ionic/vue';
+import AuthMenu from './components/menu/AuthMenu.vue';
+
+const route = useRoute();
 </script>
