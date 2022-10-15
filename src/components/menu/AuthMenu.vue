@@ -24,7 +24,6 @@ import SignUpModal from '@/views/auth/SignUpModal.vue';
 import { ref } from 'vue';
 import { Usuario } from '@/api/types';
 import useUsuarioApi from '@/api/modules/usuario';
-import { showToast } from '@/helpers/toast.helper';
 
 const usuarioApi = useUsuarioApi();
 const loginModalRef = ref();

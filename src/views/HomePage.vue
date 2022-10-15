@@ -1,5 +1,6 @@
 <template>
   <ion-page>
+    <ion-loading :is-open="loadingTV" message="Cargando..."> </ion-loading>
     <div class="home-content">
       <h2>LA VIOLENCIA</h2>
       <img class="w-9" src="/SOS.jpg" />
@@ -9,15 +10,15 @@
           <div class="flex flex-wrap flex-column">
             <img class="w-full img-tipo-violencia" :src="data.img" alt="error" />
             <strong>{{ data.titulo }}</strong>
-            <Button
-              class="p-button-warning w-full"
-              icon="pi pi-plus"
-              label="VER MAS"
-              @click="onClickTipoViolencia(data.id)"
-            />
+            <ion-button class="w-full" @click="onClickTipoViolencia(data.id)">
+              <ion-icon :icon="addOutline"></ion-icon> VER MAS
+            </ion-button>
           </div>
         </template>
       </Carousel>
+      <ion-button v-if="auth.isAdmin()" class="w-full" color="success" @click="onNewTipoViolencia">
+        <ion-icon :icon="addOutline"></ion-icon> Nuevo tipo de violencia
+      </ion-button>
       <span>LA VIOLENCIA CREA MÁS PROBLEMAS SOCIALES QUE LOS QUE RESUELVE</span>
     </div>
   </ion-page>
@@ -30,66 +31,21 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { IonPage } from '@ionic/vue';
+import { IonPage, IonButton, IonIcon, IonLoading } from '@ionic/vue';
 
 // prime
 import Carousel from 'primevue/carousel';
-import Button from 'primevue/button';
-import { useRouter } from 'vue-router';
 
-const tiposDeViolencia = [
-  {
-    id: 1,
-    img: '/imgs/violenciaFisicaSpicologica.webp',
-    titulo: 'VIOLENCIA FISICA Y PSICOLOGICA',
-    descripcion: 'texto',
-    ejemplos: ['ejemplo 1', 'ejemplo 2', 'ejemplo 3'],
-    pasos: ['paso 1', 'paso 2', 'paso 3'],
-    contactos: [
-      {
-        tipos: 'Lineas de emergencia',
-        instituciones: [
-          {
-            nombre: 'inst 1',
-            objetivo: 'Hospital',
-            direccion: 'direccion',
-            telefono: '356413',
-            ubicación: {
-              lat: 0.7645,
-              long: 0.7654,
-            },
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    img: '/imgs/otrasViolencias.png',
-    titulo: 'VIOLENCIA OTRA',
-    descripcion: 'texto',
-    ejemplos: ['ejemplo 1', 'ejemplo 2', 'ejemplo 3'],
-    pasos: ['paso 1', 'paso 2', 'paso 3'],
-    contactos: [
-      {
-        tipos: 'Lineas de emergencia',
-        instituciones: [
-          {
-            nombre: 'inst 1',
-            objetivo: 'Hospital',
-            direccion: 'direccion',
-            telefono: '356413',
-            ubicación: {
-              lat: 0.7645,
-              long: 0.7654,
-            },
-          },
-        ],
-      },
-    ],
-  },
-];
+import { useRouter } from 'vue-router';
+import useResourceComposable from '@/composables/resource.composable';
+import { Violencia } from '@/api/types';
+import { addOutline } from 'ionicons/icons';
+import useAuth from '@/store/auth';
+
+const { lista: tiposDeViolencia, loading: loadingTV } = useResourceComposable<Violencia>('violencias');
+
 const router = useRouter();
+const auth = useAuth();
 const onClickTipoViolencia = (id: number) => {
   router.push({
     name: 'TipoViolencia',
@@ -97,6 +53,10 @@ const onClickTipoViolencia = (id: number) => {
       id: id,
     },
   });
+};
+
+const onNewTipoViolencia = () => {
+  console.log('nuevo tipo de violencia');
 };
 </script>
 
