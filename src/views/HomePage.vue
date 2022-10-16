@@ -1,5 +1,6 @@
 <template>
   <ion-page>
+    <FormViolenciaModal ref="formViolenciaModelRef"></FormViolenciaModal>
     <ion-loading :is-open="loadingTV" message="Cargando..."> </ion-loading>
     <div class="home-content">
       <h2>LA VIOLENCIA</h2>
@@ -41,6 +42,8 @@ import useResourceComposable from '@/composables/resource.composable';
 import { Violencia } from '@/api/types';
 import { addOutline } from 'ionicons/icons';
 import useAuth from '@/store/auth';
+import FormViolenciaModal from './violencia/FormViolenciaModal.vue';
+import { ref } from 'vue';
 
 const { lista: tiposDeViolencia, loading: loadingTV } = useResourceComposable<Violencia>('violencias');
 
@@ -55,8 +58,9 @@ const onClickTipoViolencia = (id: number) => {
   });
 };
 
+const formViolenciaModelRef = ref<typeof FormViolenciaModal>();
 const onNewTipoViolencia = () => {
-  console.log('nuevo tipo de violencia');
+  formViolenciaModelRef.value?.open();
 };
 </script>
 
