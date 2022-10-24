@@ -7,7 +7,6 @@ import { showToast } from '@/helpers/toast.helper';
 const BASE_PREFIX = process.env.VUE_APP_API_URL;
 
 const useAxiosInstance = (): AxiosInstance => {
-  const auth = useAuth();
   // Crear instancia
   const axiosInstance: AxiosInstance = axios.create({
     // prefijo
@@ -17,15 +16,19 @@ const useAxiosInstance = (): AxiosInstance => {
     // encabezado de solicitud
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${auth.token}`,
     },
   });
 
   // interceptor de solicitudes
   axiosInstance.interceptors.request.use(
     (config: AxiosRequestConfig) => {
+      const auth = useAuth();
       // TODO Aquí puede agregar la lógica que desea procesar antes de enviar la solicitud
       // TODO loading
+      config.headers = {
+        ...config.headers,
+        Authorization: `Bearer ${auth.token}`,
+      };
       return config;
     },
     (error: AxiosError) => {
@@ -40,13 +43,13 @@ const useAxiosInstance = (): AxiosInstance => {
         return response;
       }
       if (response.status >= 400)
-        showToast({ message: JSON.stringify(response.status), type: 'error', closable: true });
+        showToast({ message: JSON.stringify(response.status), type: 'danger', closable: true });
       return response;
     },
     (error: AxiosError) => {
       const { response } = error;
       if (response) {
-        showToast({ message: showCodeMessage(response.status), type: 'error', closable: true });
+        showToast({ message: showCodeMessage(response.status), type: 'danger', closable: true });
         if (response.status === 401) {
           // eslint-disable-next-line no-shadow
           const auth = useAuth();

@@ -1,7 +1,7 @@
 <template>
-  <div class="content-linea-emergencia flex flex-wrap justify-content-between">
+  <div class="content-linea-emergencia flex flex-wrap justify-content-between mt-2">
     <img class="image-container" :src="rutaImg" />
-    <div class="pt-1">
+    <div class="pt-1 text-center">
       <div class="number-spam">{{ linea.numero }}</div>
       <div class="title-spam">{{ linea.titulo }}</div>
     </div>

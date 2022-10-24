@@ -17,19 +17,32 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <ion-item>
-        <ion-label for="Imagen" position="stacked">Imagen</ion-label>
-        <FileUpload
-          mode="basic"
-          name="file[]"
-          :url="fileApi.createUrl()"
-          accept="image/*"
-          :maxFileSize="1000000"
-          :auto="true"
-          chooseLabel="Browse"
-          @upload="onUploadImage"
-        />
-      </ion-item>
+      <div class="grid grid-nogutter">
+        <div class="col-6">
+          <ion-label for="Imagen" position="stacked">Imagen</ion-label>
+          <br />
+          <br />
+          <FileUpload
+            mode="basic"
+            name="file[]"
+            :url="fileApi.createUrl()"
+            accept="image/*"
+            :maxFileSize="1000000"
+            :auto="true"
+            chooseLabel="Browse"
+            @upload="onUploadImage"
+          />
+        </div>
+        <div class="col-6">
+          <img
+            class="imagen-img"
+            v-if="data.img !== undefined"
+            :src="fileApi.downloadUrlById(parseInt(data.img))"
+            alt="imagen"
+          />
+          <span v-else>sin imagen</span>
+        </div>
+      </div>
       <ion-item>
         <ion-label for="titulo" position="floating">Título</ion-label>
         <ion-input v-model="data.titulo" type="text"></ion-input>
@@ -38,6 +51,26 @@
         <ion-label for="descripcion" position="stacked">Descripción</ion-label>
         <Editor class="mt-2" v-model="data.descripcion"></Editor>
       </ion-item>
+      <ion-accordion-group class="mt-2">
+        <ion-accordion value="first">
+          <ion-item slot="header" color="light">
+            <ion-label>Ejemplos</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">First Content</div>
+        </ion-accordion>
+        <ion-accordion value="second">
+          <ion-item slot="header" color="light">
+            <ion-label>Pasos</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">Second Content</div>
+        </ion-accordion>
+        <ion-accordion value="third">
+          <ion-item slot="header" color="light">
+            <ion-label>Contactos</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">Third Content</div>
+        </ion-accordion>
+      </ion-accordion-group>
     </ion-content>
   </ion-modal>
 </template>
@@ -58,6 +91,8 @@ import {
   IonInput,
   IonIcon,
   IonTitle,
+  IonAccordion,
+  IonAccordionGroup,
 } from '@ionic/vue';
 import { checkmarkOutline, closeOutline } from 'ionicons/icons';
 import { ref } from 'vue';
@@ -71,7 +106,10 @@ const isOpen = ref(false);
 const fileApi = useFileApi();
 
 const onUploadImage = (resp: any) => {
-  JSON.parse(resp.xhr.response);
+  const respSend = JSON.parse(resp.xhr.response);
+  if (respSend.files) {
+    data.value.img = respSend.files[0].id;
+  }
 };
 
 function onSave() {

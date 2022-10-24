@@ -35,7 +35,6 @@ import FormLineaModal from './lineas/FormLineaModal.vue';
 const auth = useAuth();
 const {
   lista: lineasDeEmergencia,
-  loading,
   create,
   getLista,
   paginate,
