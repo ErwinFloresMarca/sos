@@ -17,13 +17,21 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <ion-item>
-        <ion-label for="Usuario" position="floating">Buscar Usuario</ion-label>
+      <div class="w-full">
+        <ion-label for="Usuario" position="floating">Buscar Usuario</ion-label> <br />
         <div class="search-input-group">
-          <ion-input v-model="data.parentType" type="text"></ion-input>
-          <ion-button> <ion-icon :icon="searchOutline"></ion-icon> </ion-button>
+          <ion-input v-model="searchCi" type="text" placeholder="Cédula de identidad"></ion-input>
+          <ion-button v-if="!userSelected" @click="onSearchUser">
+            <ion-icon :icon="searchOutline"></ion-icon>
+          </ion-button>
+          <ion-button v-else color="danger" @click="onClearParent">
+            <ion-icon :icon="trashOutline"></ion-icon>
+          </ion-button>
         </div>
-      </ion-item>
+        <div v-if="userSelected">
+          <CardUsuario :usuario="userSelected"></CardUsuario>
+        </div>
+      </div>
       <ion-item>
         <ion-label for="titulo" position="floating">Tipo de pariente</ion-label>
         <ion-input v-model="data.parentType" type="text"></ion-input>
@@ -33,7 +41,9 @@
 </template>
 
 <script setup lang="ts">
-import { Pariente } from '@/api/types';
+import useUsuarioApi from '@/api/modules/usuario';
+import { Pariente, Usuario } from '@/api/types';
+import CardUsuario from '@/components/usuario/CardUsuario.vue';
 import {
   IonModal,
   IonHeader,
@@ -47,23 +57,59 @@ import {
   IonIcon,
   IonTitle,
 } from '@ionic/vue';
-import { checkmarkOutline, closeOutline, searchOutline } from 'ionicons/icons';
+import { checkmarkOutline, closeOutline, searchOutline, trashOutline } from 'ionicons/icons';
 import { ref } from 'vue';
 
 const props = defineProps({
-  tipo: {
-    type: String,
+  usuarioId: {
+    type: Number,
     required: true,
   },
 });
+
+const usuarioApi = useUsuarioApi();
+const userSelected = ref<Usuario>();
+
+const searchCi = ref<string>('');
+
+const onSearchUser = () => {
+  usuarioApi
+    .list({
+      filter: {
+        where: {
+          ci: searchCi.value,
+          id: { nin: [props.usuarioId] },
+        },
+        fields: {
+          id: true,
+          ci: true,
+          nombres: true,
+          paterno: true,
+          materno: true,
+          avatar: true,
+        },
+      },
+    })
+    .then(({ data: respUsers }: { data: Usuario[] }) => {
+      if (respUsers[0]) {
+        userSelected.value = respUsers[0];
+        data.value.parentId = respUsers[0].id;
+      }
+    });
+};
 
 const data = ref<Partial<Pariente>>({});
 
 const emit = defineEmits(['cancel', 'save']);
 const isOpen = ref(false);
 
+function onClearParent() {
+  userSelected.value = undefined;
+  data.value.parentId = undefined;
+}
+
 function onSave() {
-  emit('save', { ...data.value, tipo: props.tipo });
+  emit('save', { ...data.value, usuarioId: props.usuarioId });
 }
 
 function cancel() {
@@ -72,11 +118,13 @@ function cancel() {
 }
 
 function open() {
+  userSelected.value = undefined;
   isOpen.value = true;
 }
 
 function close() {
   data.value = {};
+  userSelected.value = undefined;
   isOpen.value = false;
 }
 
@@ -98,6 +146,6 @@ export default {
 }
 .search-input-group {
   display: grid;
-  grid-template-columns: auto 70px;
+  grid-template-columns: auto 66px;
 }
 </style>

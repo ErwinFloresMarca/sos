@@ -1,9 +1,9 @@
 <template>
-  <div v-if="usuario" class="flex flex-wrap align-items-center">
+  <div v-if="usuario" class="card-user-container">
     <ion-avatar class="mr-2">
       <img alt="user" :src="userAvatar" />
     </ion-avatar>
-    <div>
+    <div class="w-full">
       <span class="text-xl mt-2 font-bold">{{ nombreCompleto }}</span>
       <slot name="body"> </slot>
     </div>
@@ -42,6 +42,10 @@ const userAvatar = computed<string>({
 </script>
 
 <style>
+.card-user-container {
+  display: grid;
+  grid-template-columns: 70px auto;
+}
 ion-alert.custom-alert {
   --backdrop-opacity: 0.7;
   text-align: center;

@@ -3,7 +3,7 @@ import { Pariente } from '../types';
 
 const useParienteApi = () => {
   const service = useService();
-  const endpoint = 'positions';
+  const endpoint = 'parentescos';
   return {
     count: (data: any) => service.get(`/${endpoint}/count`, data),
     list: (data: any) => service.get(`/${endpoint}`, data),
