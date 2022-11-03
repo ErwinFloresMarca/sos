@@ -56,7 +56,15 @@
           <ion-item slot="header" color="light">
             <ion-label>Ejemplos</ion-label>
           </ion-item>
-          <div class="ion-padding" slot="content">First Content</div>
+          <div class="ion-padding" slot="content">
+            <ul>
+              <li v-for="(ejem, idx) in data.ejemplos" :key="`ejemplo-${idx}`">{{ ejem }}</li>
+            </ul>
+            <FormEjemplo ref="formEjemploRef" @save="onSaveEjemplo" />
+            <ion-button v-if="!formEjemploRef?.show" class="w-full" @click="formEjemploRef.open()">
+              <ion-icon :icon="addOutline"></ion-icon> Agregar
+            </ion-button>
+          </div>
         </ion-accordion>
         <ion-accordion value="second">
           <ion-item slot="header" color="light">
@@ -94,9 +102,21 @@ import {
   IonAccordion,
   IonAccordionGroup,
 } from '@ionic/vue';
-import { checkmarkOutline, closeOutline } from 'ionicons/icons';
+import { addOutline, checkmarkOutline, closeOutline } from 'ionicons/icons';
 import { ref } from 'vue';
 import useFileApi from '@/api/modules/file';
+import FormEjemplo from './formEjemplo.vue';
+
+const formEjemploRef = ref();
+
+const onSaveEjemplo = (val: string, idx?: number) => {
+  if (data.value.ejemplos) {
+    if (idx) data.value.ejemplos[idx] = val;
+    else data.value.ejemplos.push(val);
+  } else {
+    data.value.ejemplos = [val];
+  }
+};
 
 const data = ref<Partial<Violencia>>({});
 

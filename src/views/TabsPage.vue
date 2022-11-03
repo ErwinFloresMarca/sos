@@ -9,13 +9,19 @@
         </ion-tab-button>
 
         <ion-tab-button tab="tab3" href="/app/lineas-de-emergencia">
-          <ion-icon :icon="flag" />
-          <ion-label>Lineas de emergencia</ion-label>
-        </ion-tab-button>
-
-        <ion-tab-button tab="tab2" href="/app/lineas-de-orientacion">
           <ion-icon :icon="alert" />
-          <ion-label>Lineas de orientación</ion-label>
+          <ion-label>Lineas</ion-label>
+        </ion-tab-button>
+        <!-- <ion-tab-button tab="tab2" href="/app/lineas-de-orientacion">
+          <ion-icon :icon="alert" />
+          <ion-label
+            >Lineas de <br />
+            orientación</ion-label
+          >
+        </ion-tab-button> -->
+        <ion-tab-button tab="tab4" href="/app/geolocation">
+          <ion-icon :icon="pin" />
+          <ion-label>Ubicación</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
@@ -25,7 +31,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
-import { alert, flag, home } from 'ionicons/icons';
+import { alert, flag, home, pin } from 'ionicons/icons';
 
 export default defineComponent({
   name: 'TabsPage',
@@ -35,6 +41,7 @@ export default defineComponent({
       alert,
       flag,
       home,
+      pin,
     };
   },
 });

@@ -8,8 +8,11 @@
       </ion-header>
       <ion-content class="ion-padding">
         <auth-menu> </auth-menu>
+        <ion-button class="w-full" @click="$router.push({ name: 'Parientes' })">
+          <ion-icon :icon="peopleOutline"></ion-icon> Parientes</ion-button
+        >
         <ion-list>
-          <ion-item>Preguntas frecuentes</ion-item>
+          <ion-item>Preguntas Frecuentes</ion-item>
         </ion-list>
       </ion-content>
     </ion-menu>
@@ -55,9 +58,10 @@ import {
   IonPage,
   IonIcon,
   IonToggle,
+  IonButton,
 } from '@ionic/vue';
 import AuthMenu from './components/menu/AuthMenu.vue';
-import { sunnyOutline } from 'ionicons/icons';
+import { peopleOutline, sunnyOutline } from 'ionicons/icons';
 
 const toggle = ref(false);
 

@@ -45,6 +45,22 @@ const routes: Array<RouteRecordRaw> = [
         },
         component: () => import('../views/lineasDeEmergencia.vue'),
       },
+      {
+        name: 'GeoLocation',
+        path: 'geolocation',
+        meta: {
+          title: 'Ubicación',
+        },
+        component: () => import('../views/GeoLocation.vue'),
+      },
+      {
+        name: 'Parientes',
+        path: 'parientes',
+        meta: {
+          title: 'Parientes',
+        },
+        component: () => import('../views/parientes/index.vue'),
+      },
     ],
   },
 ];
