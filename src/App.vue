@@ -8,8 +8,8 @@
       </ion-header>
       <ion-content class="ion-padding">
         <auth-menu> </auth-menu>
-        <ion-button class="w-full" @click="$router.push({ name: 'Parientes' })">
-          <ion-icon :icon="peopleOutline"></ion-icon> Parientes</ion-button
+        <ion-button v-if="auth.isLogged" class="w-full" @click="$router.push({ name: 'ListParientes' })">
+          <ion-icon class="mr-2" :icon="peopleCircleOutline"></ion-icon>Mis parientes</ion-button
         >
         <ion-list>
           <ion-item>Preguntas Frecuentes</ion-item>
@@ -61,11 +61,14 @@ import {
   IonButton,
 } from '@ionic/vue';
 import AuthMenu from './components/menu/AuthMenu.vue';
-import { peopleOutline, sunnyOutline } from 'ionicons/icons';
+import { peopleCircleOutline, sunnyOutline } from 'ionicons/icons';
+import useAuth from './store/auth';
 
 const toggle = ref(false);
 
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+const auth = useAuth();
 
 const changeColorTheme = (ev: any, d?: boolean) => {
   toggle.value = !toggle.value;

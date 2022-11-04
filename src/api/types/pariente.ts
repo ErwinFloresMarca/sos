@@ -6,6 +6,7 @@ export interface IPariente {
   usuarioId: number;
   parentType: string;
   parent?: Usuario;
+  usuario?: Usuario;
 }
 
 export class Pariente implements IPariente {
@@ -14,6 +15,7 @@ export class Pariente implements IPariente {
   usuarioId: number;
   parentType: string;
   parent?: Usuario;
+  usuario?: Usuario;
 
   constructor(object: IPariente) {
     this.id = object.id;
@@ -21,5 +23,6 @@ export class Pariente implements IPariente {
     this.usuarioId = object.usuarioId;
     this.parentType = object.parentType;
     this.parent = object.parent;
+    this.usuario = object.usuario;
   }
 }

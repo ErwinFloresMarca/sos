@@ -117,8 +117,13 @@ function cancel() {
   close();
 }
 
-function open() {
+function open(parent: Usuario) {
   userSelected.value = undefined;
+  if (parent) {
+    userSelected.value = parent;
+    data.value.parentId = userSelected.value.id;
+    searchCi.value = userSelected.value.ci || '';
+  }
   isOpen.value = true;
 }
 

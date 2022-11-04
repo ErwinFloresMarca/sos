@@ -1,3 +1,4 @@
+import { showToast } from '@/helpers/toast.helper';
 import { ref } from 'vue';
 import { Geolocation } from '@capacitor/geolocation';
 import useRastreoApi from '@/api/modules/rastreo.api';
@@ -64,8 +65,18 @@ export function useGeoLocation() {
   };
 
   const stopGeoLocation = () => {
-    isActiveGeoLocation.value = false;
-    clearInterval(intervalGL.value);
+    if (rastreo.value) {
+      isActiveGeoLocation.value = false;
+      rastreoApi.update(rastreo.value?.id, { estado: false }).then(() => {
+        showToast({
+          message: 'Geo localización en tiempo real detenido',
+          closable: true,
+          duration: 3000,
+          type: 'success',
+        });
+      });
+      clearInterval(intervalGL.value);
+    }
   };
 
   return {

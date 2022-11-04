@@ -54,11 +54,26 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('../views/GeoLocation.vue'),
       },
       {
-        name: 'Parientes',
         path: 'parientes',
-        meta: {
-          title: 'Parientes',
-        },
+        redirect: '/parientes/list',
+        children: [
+          {
+            name: 'ListParientes',
+            path: 'list',
+            meta: {
+              title: 'Parientes',
+            },
+            component: () => import('../views/parientes/listar/index.vue'),
+          },
+          {
+            name: 'ParienteRastreo',
+            path: ':id/rastreos',
+            meta: {
+              title: 'Pariente rastreos',
+            },
+            component: () => import('../views/parientes/rastreos/index.vue'),
+          },
+        ],
         component: () => import('../views/parientes/index.vue'),
       },
     ],
