@@ -12,10 +12,21 @@
         </template>
       </CardUsuario>
     </div>
-    <div v-if="!rastreoSelected" class="lista-rastreos">
-      <CardRastreo v-for="rst in rastreos" :key="rst.id" :rastreo="rst"> </CardRastreo>
+    <div class="lista-rastreos">
+      <CardRastreo
+        v-for="rst in rastreos"
+        :key="rst.id"
+        :rastreo="rst"
+        @click="
+          $router.push({
+            name: 'Rastreo',
+            params: {
+              id: rst.id,
+            },
+          })
+        "
+      />
     </div>
-    <div v-else class="detalle-rastreo">rastreo seleccionado</div>
   </ion-page>
 </template>
 
@@ -38,7 +49,6 @@ const rastreoApi = useRastreoApi();
 const loading = ref(false);
 
 const rastreos = ref<Rastreo[]>([]);
-const rastreoSelected = ref<Rastreo>();
 
 const getRastreos = () => {
   if (usuario.value) {

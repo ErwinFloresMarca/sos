@@ -73,6 +73,14 @@ const routes: Array<RouteRecordRaw> = [
             },
             component: () => import('../views/parientes/rastreos/index.vue'),
           },
+          {
+            name: 'Rastreo',
+            path: 'rastreo/:id',
+            meta: {
+              title: 'Rastreo',
+            },
+            component: () => import('../views/parientes/rastreos/ViewRastreo.vue'),
+          },
         ],
         component: () => import('../views/parientes/index.vue'),
       },
