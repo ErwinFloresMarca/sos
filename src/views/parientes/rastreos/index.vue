@@ -50,7 +50,17 @@ const getRastreos = () => {
             usuarioId: usuario.value?.id,
           },
           order: 'createdAt DESC',
-          include: ['positions'],
+          include: [
+            {
+              relation: 'positions',
+              scope: {
+                fields: {
+                  id: true,
+                  rastreoId: true,
+                },
+              },
+            },
+          ],
         },
       })
       .then(({ data }: { data: Rastreo[] }) => {
