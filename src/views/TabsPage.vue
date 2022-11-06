@@ -1,7 +1,12 @@
 <template>
   <ion-page>
+    <ion-fab v-if="auth.user" class="fab-btn-not" vertical="bottom" horizontal="end">
+      <ion-fab-button color="warning" @click="onPressBtnPanic">
+        <ion-icon class="icon-not-btn" :icon="notificationsCircleOutline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
     <ion-tabs>
-      <ion-router-outlet></ion-router-outlet>
+      <ion-router-outlet> </ion-router-outlet>
       <ion-tab-bar slot="bottom">
         <ion-tab-button tab="tab1" href="/app/home">
           <ion-icon :icon="home" />
@@ -30,22 +35,65 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
-import { alert, flag, home, pin } from 'ionicons/icons';
+import {
+  IonTabBar,
+  IonTabButton,
+  IonTabs,
+  IonLabel,
+  IonIcon,
+  IonPage,
+  IonRouterOutlet,
+  IonFab,
+  IonFabButton,
+} from '@ionic/vue';
+import { alert, flag, home, notificationsCircleOutline, pin } from 'ionicons/icons';
 import useAuth from '@/store/auth';
+import useUsuarioApi from '@/api/modules/usuario';
+import { showToast } from '@/helpers/toast.helper';
+import { Geolocation } from '@capacitor/geolocation';
 
 export default defineComponent({
   name: 'TabsPage',
-  components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage, IonRouterOutlet },
+  components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage, IonRouterOutlet, IonFab, IonFabButton },
   setup() {
     const auth = useAuth();
+    const usarioApi = useUsuarioApi();
+    const onPressBtnPanic = async () => {
+      if (auth.user) {
+        const coordinates = await Geolocation.getCurrentPosition();
+        usarioApi
+          .panicNotif(auth.user?.id, {
+            lat: coordinates.coords.latitude,
+            lng: coordinates.coords.longitude,
+          })
+          .then(() => {
+            showToast({
+              message: 'Mensaje enviado!',
+              closable: true,
+              duration: 3000,
+              type: 'success',
+            });
+          });
+      }
+    };
     return {
       auth,
       alert,
       flag,
       home,
       pin,
+      notificationsCircleOutline,
+      onPressBtnPanic,
     };
   },
 });
 </script>
+
+<style scoped>
+.fab-btn-not {
+  bottom: 70px;
+}
+.icon-not-btn {
+  font-size: 3rem !important;
+}
+</style>
