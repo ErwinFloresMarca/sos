@@ -19,7 +19,7 @@
             orientación</ion-label
           >
         </ion-tab-button> -->
-        <ion-tab-button tab="tab4" href="/app/geolocation">
+        <ion-tab-button v-if="auth.isLogged" tab="tab4" href="/app/geolocation">
           <ion-icon :icon="pin" />
           <ion-label>Ubicación</ion-label>
         </ion-tab-button>
@@ -32,12 +32,15 @@
 import { defineComponent } from 'vue';
 import { IonTabBar, IonTabButton, IonTabs, IonLabel, IonIcon, IonPage, IonRouterOutlet } from '@ionic/vue';
 import { alert, flag, home, pin } from 'ionicons/icons';
+import useAuth from '@/store/auth';
 
 export default defineComponent({
   name: 'TabsPage',
   components: { IonLabel, IonTabs, IonTabBar, IonTabButton, IonIcon, IonPage, IonRouterOutlet },
   setup() {
+    const auth = useAuth();
     return {
+      auth,
       alert,
       flag,
       home,

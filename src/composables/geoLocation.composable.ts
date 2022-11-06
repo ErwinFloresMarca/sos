@@ -15,17 +15,13 @@ export function useGeoLocation() {
   });
 
   const mapKey = ref(1);
-
   const isActiveGeoLocation = ref(false);
-
   const intervalGL = ref();
 
   const rastreoApi = useRastreoApi();
-
   const positionApi = usePositionApi();
 
   const rastreo = ref<Rastreo>();
-
   const registerPositions = ref<Array<Position>>([]);
 
   const registerPosition = (lat: number, lng: number) => {
