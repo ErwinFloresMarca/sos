@@ -18,7 +18,7 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
+    <ion-content class="ion-padding form-container">
       <ion-item>
         <ion-label for="username" position="floating">Usuario</ion-label>
         <ion-input v-model="data.usuario" ref="username" type="text" placeholder="Usuario"></ion-input>
@@ -111,4 +111,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.form-container {
+  height: calc(100% - 70px);
+}
+</style>

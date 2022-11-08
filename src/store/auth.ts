@@ -44,7 +44,8 @@ const useAuth = defineStore({
           this.isLoggedIn = true;
           return true;
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err);
           return false;
         });
       return isLogin;

@@ -12,7 +12,7 @@ const useUsuarioApi = () => {
     update: (id: number | string, data: any) => service.patch(`/${endpoint}/${id}`, data),
     changePassword: (id: number | string, data: any) => service.patch(`/${endpoint}/${id}/change-password`, data),
     panicNotif: (id: number | string, data: { lat: number; lng: number }) =>
-      service.post(`/${endpoint}/${id}/send-not-what`, data),
+      service.post(`/user/${id}/send-not-what`, data),
   };
 };
 

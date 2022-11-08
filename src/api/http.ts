@@ -25,6 +25,7 @@ const useAxiosInstance = (): AxiosInstance => {
       const auth = useAuth();
       // TODO Aquí puede agregar la lógica que desea procesar antes de enviar la solicitud
       // TODO loading
+      console.log('bae url server: ', config.baseURL, '<--------------');
       config.headers = {
         ...config.headers,
         Authorization: `Bearer ${auth.token}`,
