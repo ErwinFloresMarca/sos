@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-fab v-if="auth.user" class="fab-btn-not" vertical="bottom" horizontal="end">
+    <ion-fab v-if="auth.user" class="fab-btn-not" vertical="bottom" horizontal="start">
       <ion-fab-button color="warning" @click="onPressBtnPanic">
         <ion-icon class="icon-not-btn" :icon="notificationsCircleOutline"></ion-icon>
       </ion-fab-button>

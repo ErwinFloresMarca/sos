@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <FormViolenciaModal ref="formViolenciaModelRef"></FormViolenciaModal>
+    <FormViolenciaModal ref="formViolenciaModelRef" @save="onSaveTipoViolencia"></FormViolenciaModal>
     <ion-loading :is-open="loadingTV" message="Cargando..."> </ion-loading>
     <div class="home-content">
       <h2>LA VIOLENCIA</h2>
@@ -9,7 +9,7 @@
       <Carousel :value="tiposDeViolencia">
         <template #item="{ data }">
           <div class="flex flex-wrap flex-column">
-            <img class="w-full img-tipo-violencia" :src="data.img" alt="error" />
+            <img class="w-full img-tipo-violencia" :src="fileApi.downloadUrl(data.img)" alt="error" />
             <strong>{{ data.titulo }}</strong>
             <ion-button class="w-full" @click="onClickTipoViolencia(data.id)">
               <ion-icon :icon="addOutline"></ion-icon> VER MAS
@@ -43,9 +43,17 @@ import { Violencia } from '@/api/types';
 import { addOutline } from 'ionicons/icons';
 import useAuth from '@/store/auth';
 import FormViolenciaModal from './violencia/FormViolenciaModal.vue';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import useFileApi from '@/api/modules/file';
 
-const { lista: tiposDeViolencia, loading: loadingTV } = useResourceComposable<Violencia>('violencias');
+const fileApi = useFileApi();
+
+const {
+  lista: tiposDeViolencia,
+  loading: loadingTV,
+  getLista,
+  create,
+} = useResourceComposable<Violencia>('violencias');
 
 const router = useRouter();
 const auth = useAuth();
@@ -58,19 +66,31 @@ const onClickTipoViolencia = (id: number) => {
   });
 };
 
+onMounted(() => {
+  getLista();
+});
+
 const formViolenciaModelRef = ref<typeof FormViolenciaModal>();
 const onNewTipoViolencia = () => {
   formViolenciaModelRef.value?.open();
+};
+
+const onSaveTipoViolencia = async (tipoVioleancia: Violencia) => {
+  const resp = await create(tipoVioleancia, true);
+  if (resp) {
+    formViolenciaModelRef.value?.close();
+  }
 };
 </script>
 
 <style scoped>
 .home-content {
-  height: calc(100vh - 120px);
   text-align: center;
   width: 100%;
   padding: 10px;
   margin: 0px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .img-tipo-violencia {
   border-radius: 15px;

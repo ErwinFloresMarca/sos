@@ -4,11 +4,16 @@ export interface IViolencia {
   titulo: string;
   descripcion: string;
   ejemplos?: string[];
-  pasos: Array<any>;
+  pasos: Array<PasoType>;
   contactos: Array<any>;
   updatedAt: string | Date;
   createdAt: string | Date;
 }
+
+export type PasoType = {
+  descripcion?: string;
+  titulo?: string;
+};
 
 export class Violencia implements IViolencia {
   id: number;
@@ -16,7 +21,7 @@ export class Violencia implements IViolencia {
   titulo: string;
   descripcion: string;
   ejemplos?: string[];
-  pasos: Array<any>;
+  pasos: Array<PasoType>;
   contactos: Array<any>;
   updatedAt: string | Date;
   createdAt: string | Date;

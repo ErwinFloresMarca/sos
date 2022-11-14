@@ -25,7 +25,7 @@ export default function useGetQueryComposable() {
         order: order.value,
         where: where.value,
         fields: Object.keys(fields.value).length > 0 ? fields.value : undefined,
-        include: include.value,
+        include: include.value && include.value.length > 0 ? include.value : undefined,
       },
     };
   };

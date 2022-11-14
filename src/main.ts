@@ -36,7 +36,12 @@ import authDirective from './directives/auth.directive';
 
 import store from '@/store';
 
-const app = createApp(App).use(IonicVue).use(router).use(store);
+// html safe
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import VueSecureHTML from 'vue-html-secure';
+
+const app = createApp(App).use(IonicVue).use(VueSecureHTML).use(router).use(store);
 // Use primevue
 app.directive('tooltip', Tooltip);
 app.use(PrimeVue).use(ToastService);

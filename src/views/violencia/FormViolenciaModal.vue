@@ -34,12 +34,7 @@
           />
         </div>
         <div class="col-6">
-          <img
-            class="imagen-img"
-            v-if="data.img !== undefined"
-            :src="fileApi.downloadUrlById(parseInt(data.img))"
-            alt="imagen"
-          />
+          <img class="imagen-img" v-if="data.img !== undefined" :src="fileApi.downloadUrl(data.img)" alt="imagen" />
           <span v-else>sin imagen</span>
         </div>
       </div>
@@ -70,7 +65,13 @@
           <ion-item slot="header" color="light">
             <ion-label>Pasos</ion-label>
           </ion-item>
-          <div class="ion-padding" slot="content">Second Content</div>
+          <div class="ion-padding" slot="content">
+            <CardPaso v-for="(paso, idx) in data.pasos" :key="`paso-${idx}`" :paso="paso" :position="idx + 1" />
+            <FormPaso ref="formPasoRef" @save="onSavePaso" />
+            <ion-button v-if="!formPasoRef?.show" class="w-full" @click="formPasoRef.open()">
+              <ion-icon :icon="addOutline"></ion-icon> Agregar
+            </ion-button>
+          </div>
         </ion-accordion>
         <ion-accordion value="third">
           <ion-item slot="header" color="light">
@@ -84,7 +85,7 @@
 </template>
 
 <script setup lang="ts">
-import { Violencia } from '@/api/types';
+import { PasoType, Violencia } from '@/api/types';
 import Editor from 'primevue/editor';
 import FileUpload from 'primevue/fileupload';
 import {
@@ -105,8 +106,11 @@ import {
 import { addOutline, checkmarkOutline, closeOutline } from 'ionicons/icons';
 import { ref } from 'vue';
 import useFileApi from '@/api/modules/file';
-import FormEjemplo from './formEjemplo.vue';
+import FormEjemplo from './components/formEjemplo.vue';
+import CardPaso from './components/CardPaso.vue';
+import FormPaso from './components/FormPaso.vue';
 
+// EJEMPLO
 const formEjemploRef = ref();
 
 const onSaveEjemplo = (val: string, idx?: number) => {
@@ -115,6 +119,18 @@ const onSaveEjemplo = (val: string, idx?: number) => {
     else data.value.ejemplos.push(val);
   } else {
     data.value.ejemplos = [val];
+  }
+};
+
+// PASO
+const formPasoRef = ref();
+
+const onSavePaso = (val: PasoType, idx?: number) => {
+  if (data.value.pasos) {
+    if (idx) data.value.pasos[idx] = val;
+    else data.value.pasos.push(val);
+  } else {
+    data.value.pasos = [val];
   }
 };
 
@@ -128,7 +144,7 @@ const fileApi = useFileApi();
 const onUploadImage = (resp: any) => {
   const respSend = JSON.parse(resp.xhr.response);
   if (respSend.files) {
-    data.value.img = respSend.files[0].id;
+    data.value.img = respSend.files[0].fileName;
   }
 };
 
@@ -162,6 +178,7 @@ defineExpose({
 <script lang="ts">
 export default {
   name: 'FormViolenciaModal',
+  components: { CardPaso, FormPaso },
 };
 </script>
 
