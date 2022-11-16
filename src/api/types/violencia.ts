@@ -15,6 +15,17 @@ export type PasoType = {
   titulo?: string;
 };
 
+export type ContactoType = {
+  entidades: Array<EntidadType>;
+  titulo: string;
+};
+export type EntidadType = {
+  nombre: string;
+  direccion: string;
+  telefono?: string;
+  ubicacion?: { lat: number; lng: number };
+};
+
 export class Violencia implements IViolencia {
   id: number;
   img: string;

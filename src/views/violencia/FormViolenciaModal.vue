@@ -77,7 +77,18 @@
           <ion-item slot="header" color="light">
             <ion-label>Contactos</ion-label>
           </ion-item>
-          <div class="ion-padding" slot="content">Third Content</div>
+          <div class="ion-padding" slot="content">
+            <CardContacto
+              v-for="(contacto, idx) in data.contactos"
+              :key="`paso-${idx}`"
+              :contacto="contacto"
+              :position="idx + 1"
+            />
+            <FormContactoModal ref="formContactoModalRef" @save="onSaveContacto" />
+            <ion-button v-if="!formContactoModalRef?.show" class="w-full" @click="formContactoModalRef.open()">
+              <ion-icon :icon="addOutline"></ion-icon> Agregar
+            </ion-button>
+          </div>
         </ion-accordion>
       </ion-accordion-group>
     </ion-content>
@@ -109,6 +120,8 @@ import useFileApi from '@/api/modules/file';
 import FormEjemplo from './components/formEjemplo.vue';
 import CardPaso from './components/CardPaso.vue';
 import FormPaso from './components/FormPaso.vue';
+import FormContactoModal from './components/FormContactoModal.vue';
+import CardContacto from './components/CardContacto.vue';
 
 // EJEMPLO
 const formEjemploRef = ref();
@@ -131,6 +144,17 @@ const onSavePaso = (val: PasoType, idx?: number) => {
     else data.value.pasos.push(val);
   } else {
     data.value.pasos = [val];
+  }
+};
+// CONTACTO
+const formContactoModalRef = ref();
+
+const onSaveContacto = (val: any, idx?: number) => {
+  if (data.value.contactos) {
+    if (idx) data.value.contactos[idx] = val;
+    else data.value.contactos.push(val);
+  } else {
+    data.value.contactos = [val];
   }
 };
 
@@ -178,7 +202,7 @@ defineExpose({
 <script lang="ts">
 export default {
   name: 'FormViolenciaModal',
-  components: { CardPaso, FormPaso },
+  components: { CardContacto },
 };
 </script>
 
