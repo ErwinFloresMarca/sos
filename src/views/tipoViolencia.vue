@@ -1,86 +1,91 @@
 <template>
   <ion-page>
-    <ion-content class="ion-padding">
+    <ion-content v-if="tipoViolencia" class="ion-padding container-tipo-violencia">
       <h4>{{ tipoViolencia.titulo }}</h4>
-      <img class="w-full img-tipo-violencia" :src="tipoViolencia.img" alt="error" />
+      <img class="w-full img-tipo-violencia" :src="fileApi.downloadUrl(tipoViolencia.img)" alt="error" />
+      <div class="w-full ql-editor" style="height: fit-content" v-html-safe="tipoViolencia.descripcion"></div>
+      <ion-accordion-group class="mt-2">
+        <ion-accordion value="first">
+          <ion-item slot="header" color="light">
+            <ion-label>Ejemplos</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <ul>
+              <li v-for="(ejem, idx) in tipoViolencia.ejemplos" :key="`ejemplo-${idx}`">{{ ejem }}</li>
+            </ul>
+          </div>
+        </ion-accordion>
+        <ion-accordion value="second">
+          <ion-item slot="header" color="light">
+            <ion-label>Pasos</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <CardPaso
+              v-for="(paso, idx) in tipoViolencia.pasos"
+              :key="`paso-${idx}`"
+              :paso="paso"
+              :position="idx + 1"
+            />
+          </div>
+        </ion-accordion>
+        <ion-accordion value="third">
+          <ion-item slot="header" color="light">
+            <ion-label>Contactos</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <CardContacto
+              v-for="(contacto, idx) in tipoViolencia.contactos"
+              :key="`paso-${idx}`"
+              :contacto="contacto"
+              :position="idx + 1"
+            />
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
     </ion-content>
   </ion-page>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'TipoViolencia',
-};
-</script>
-
 <script setup lang="ts">
-import { IonPage, IonContent } from '@ionic/vue';
+import useFileApi from '@/api/modules/file';
+import useResourceApi from '@/api/resource';
+import { Violencia } from '@/api/types';
+import { showToast } from '@/helpers/toast.helper';
+import { IonPage, IonContent, IonAccordionGroup, IonAccordion, IonItem, IonLabel } from '@ionic/vue';
+import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import CardContacto from './violencia/components/CardContacto.vue';
+import CardPaso from './violencia/components/CardPaso.vue';
 
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+const violenaciaApi = useResourceApi('violencias');
 
-const tiposDeViolencia = [
-  {
-    id: 1,
-    img: '/imgs/violenciaFisicaSpicologica.webp',
-    titulo: 'VIOLENCIA FISICA Y PSICOLOGICA',
-    descripcion: 'texto',
-    ejemplos: ['ejemplo 1', 'ejemplo 2', 'ejemplo 3'],
-    pasos: ['paso 1', 'paso 2', 'paso 3'],
-    contactos: [
-      {
-        tipos: 'Lineas de emergencia',
-        instituciones: [
-          {
-            nombre: 'inst 1',
-            objetivo: 'Hospital',
-            direccion: 'direccion',
-            telefono: '356413',
-            ubicación: {
-              lat: 0.7645,
-              long: 0.7654,
-            },
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    img: '/imgs/otrasViolencias.png',
-    titulo: 'VIOLENCIA OTRA',
-    descripcion: 'texto',
-    ejemplos: ['ejemplo 1', 'ejemplo 2', 'ejemplo 3'],
-    pasos: ['paso 1', 'paso 2', 'paso 3'],
-    contactos: [
-      {
-        tipos: 'Lineas de emergencia',
-        instituciones: [
-          {
-            nombre: 'inst 1',
-            objetivo: 'Hospital',
-            direccion: 'direccion',
-            telefono: '356413',
-            ubicación: {
-              lat: 0.7645,
-              long: 0.7654,
-            },
-          },
-        ],
-      },
-    ],
-  },
-];
+const fileApi = useFileApi();
 
 const route = useRoute();
-const tipoViolencia = computed<any>({
-  get: () => {
-    return (
-      tiposDeViolencia.find((tp) => (route.params.id ? tp.id == parseInt(route.params.id.toString()) : undefined)) || {}
-    );
-  },
-  set: (val) => val,
+const router = useRouter();
+
+const tipoViolencia = ref<Violencia>();
+
+onMounted(() => {
+  violenaciaApi
+    .getById(parseInt(route.params.id.toString()))
+    .then(({ data }: { data: Violencia }) => {
+      tipoViolencia.value = data;
+    })
+    .catch(() => {
+      showToast({
+        message: 'Error al recuperar la información',
+        closable: true,
+        duration: 3000,
+        type: 'danger',
+      });
+      router.go(-1);
+    });
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.container-tipo-violencia {
+  height: calc(100vh - 60px);
+}
+</style>
