@@ -15,17 +15,20 @@
           ></a>
         </strong>
       </div>
-      <div class="col-12 flex flex-wrap justify-content-between">
-        <ion-button class="w-full" color="dark">
+      <div v-if="entidad.ubicacion" class="col-12 flex flex-wrap justify-content-center">
+        <a
+          class=""
+          :href="`https://www.google.com/maps/search/?api=1&query=${entidad.ubicacion.lat},${entidad.ubicacion.lng}`"
+        >
           <ion-icon :icon="navigateCircleOutline"></ion-icon> Ubicación
-        </ion-button>
+        </a>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { IonIcon, IonButton } from '@ionic/vue';
+import { IonIcon } from '@ionic/vue';
 import { EntidadType } from '@/api/types';
 import { PropType, ref } from 'vue';
 import { callOutline, navigateCircleOutline } from 'ionicons/icons';
