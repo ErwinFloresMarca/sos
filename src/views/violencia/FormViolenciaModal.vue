@@ -202,7 +202,6 @@ defineExpose({
 <script lang="ts">
 export default {
   name: 'FormViolenciaModal',
-  components: { CardContacto },
 };
 </script>
 

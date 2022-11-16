@@ -1,7 +1,8 @@
 <template>
   <div class="card-entidad">
     <div class="entidad-header" @click="tootgleShow">
-      <strong>PASO {{ position }}:</strong> {{ entidad.nombre }}
+      <strong>{{ entidad.nombre }}</strong>
+      <ion-icon :icon="showDescription ? removeCircleOutline : addCircleOutline"></ion-icon>
     </div>
     <div v-if="showDescription" class="entidad-content grid grid-nogutter">
       <div class="col-12 flex flex-wrap justify-content-between">
@@ -31,7 +32,7 @@
 import { IonIcon } from '@ionic/vue';
 import { EntidadType } from '@/api/types';
 import { PropType, ref } from 'vue';
-import { callOutline, navigateCircleOutline } from 'ionicons/icons';
+import { addCircleOutline, callOutline, navigateCircleOutline, removeCircleOutline } from 'ionicons/icons';
 
 defineProps({
   entidad: {
@@ -57,6 +58,9 @@ const tootgleShow = () => {
   border-radius: 5px;
 }
 .entidad-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   cursor: pointer;
   background-color: rgb(180, 248, 255);
   padding: 5px;
