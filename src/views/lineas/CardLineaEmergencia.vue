@@ -48,7 +48,7 @@ export default {
   border-radius: 10px;
 }
 .content-linea-emergencia {
-  background-color: #00000011;
+  background-color: rgba(56, 10, 46, 0.7);
   border-radius: 15px;
   padding: 0px;
 }

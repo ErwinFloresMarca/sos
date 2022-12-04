@@ -48,7 +48,7 @@ export default {
 
 <style scoped>
 .card-rastreo {
-  background-color: rgba(var(--ion-color-themel-rgb), 0.7);
+  background-color: rgba(56, 10, 46, 0.7);
   padding: 10px;
   border-radius: 10px;
 }
