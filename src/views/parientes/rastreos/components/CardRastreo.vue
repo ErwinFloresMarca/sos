@@ -2,7 +2,7 @@
   <div class="m-2 card-rastreo">
     <div class="flex flex-wrap justify-content-between">
       <div class="w-fit">
-        <ion-text color="medium"><strong>RASTREO</strong></ion-text>
+        <ion-text color="themel"><strong>RASTREO</strong></ion-text>
       </div>
       <div class="w-fit text-right">
         <ion-text color="secondary"
@@ -48,7 +48,7 @@ export default {
 
 <style scoped>
 .card-rastreo {
-  background-color: #77777777;
+  background-color: rgba(var(--ion-color-themel-rgb), 0.7);
   padding: 10px;
   border-radius: 10px;
 }
