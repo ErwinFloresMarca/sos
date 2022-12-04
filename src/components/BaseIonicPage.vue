@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar color="themem">
         <ion-buttons slot="start">
           <ion-menu-button v-if="showBtnMenu"></ion-menu-button>
         </ion-buttons>
@@ -11,9 +11,9 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content :fullscreen="true">
+    <ion-content color="themel" :fullscreen="true">
       <ion-header collapse="condense">
-        <ion-toolbar>
+        <ion-toolbar color="themem">
           <ion-title size="large">{{ title }}</ion-title>
         </ion-toolbar>
       </ion-header>

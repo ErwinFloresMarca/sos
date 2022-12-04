@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-content class="ion-padding">
+    <ion-content color="themel" class="ion-padding">
       <div class="map-comtainer">
         <MapLatLng :key="mapKey" v-model="currentPosition" />
       </div>
@@ -15,7 +15,7 @@
       </div>
       <ion-accordion-group v-if="cantPositions > 0">
         <ion-accordion value="positions">
-          <ion-item slot="header" color="light">
+          <ion-item slot="header" color="themem">
             <ion-label>Puntos</ion-label>
           </ion-item>
           <div class="ion-padding" slot="content">

@@ -14,7 +14,7 @@
     </ion-item>
     <div class="w-full">
       <ion-label position="stacked">Ubicación:</ion-label>
-      <div class="map-comtainer">
+      <div class="map-comtainer w-full" style="height: 300px">
         <MapLatLng :key="mapKey" v-model="currentPosition" />
       </div>
     </div>
@@ -75,7 +75,7 @@ const open = async (val?: EntidadType, i?: number) => {
   show.value = true;
   setTimeout(() => {
     mapKey.value = `key-map_${parseInt(`${Math.random() * 1000}`)}`;
-  }, 300);
+  }, 400);
 };
 const close = () => {
   show.value = false;

@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-content class="ion-padding">
+    <ion-content color="themel" class="ion-padding">
       <div>lineas de orientacion</div>
     </ion-content>
   </ion-page>

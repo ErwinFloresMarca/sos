@@ -2,7 +2,7 @@
   <ion-modal :is-open="show">
     <!-- :initial-breakpoint="0.3" :breakpoints="[0.3, 0.5]" -->
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar color="themem">
         <ion-buttons slot="start">
           <ion-button color="success" @click="onSave">
             <ion-icon slot="start" :icon="checkmarkOutline"></ion-icon>
@@ -16,7 +16,7 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding content-container">
+    <ion-content color="themel" class="ion-padding content-container">
       <ion-item>
         <ion-label position="floating">titulo contactos:</ion-label>
         <ion-textarea v-model="value.titulo" placeholder="Titulo"></ion-textarea>

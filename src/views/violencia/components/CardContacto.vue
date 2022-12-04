@@ -8,7 +8,7 @@
     <ion-modal :is-open="show">
       <!-- :initial-breakpoint="0.3" :breakpoints="[0.3, 0.5]" -->
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="themem">
           <ion-title class="text-center">Entidades</ion-title>
           <ion-buttons slot="end">
             <ion-button color="danger" @click="toggleShow">
@@ -17,7 +17,7 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding content-container">
+      <ion-content color="themel" class="ion-padding content-container">
         <div class="w-full">
           <CardEntidad
             v-for="(entidad, idx) in contacto.entidades"

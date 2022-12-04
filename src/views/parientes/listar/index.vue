@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-content v-if="auth.user" class="ion-padding">
+    <ion-content color="themel" v-if="auth.user" class="ion-padding">
       <FormParienteModal
         ref="formParienteModalRef"
         :usuario-id="auth.user?.id"

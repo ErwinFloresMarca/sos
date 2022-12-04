@@ -2,7 +2,7 @@
   <ion-modal :is-open="isOpen">
     <!-- :initial-breakpoint="0.3" :breakpoints="[0.3, 0.5]" -->
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar color="themem">
         <ion-buttons slot="start">
           <ion-button color="success" @click="onSave">
             <ion-icon slot="start" :icon="checkmarkOutline"></ion-icon>
@@ -18,7 +18,7 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding form-container">
+    <ion-content color="themel" class="ion-padding form-container">
       <ion-item>
         <ion-label for="username" position="floating">Usuario</ion-label>
         <ion-input v-model="data.usuario" ref="username" type="text" placeholder="Usuario"></ion-input>

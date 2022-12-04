@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-content>
+    <ion-content color="themel">
       <ion-router-outlet />
     </ion-content>
   </ion-page>

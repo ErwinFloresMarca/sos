@@ -2,7 +2,7 @@
   <ion-modal :is-open="isOpen">
     <!-- :initial-breakpoint="0.3" :breakpoints="[0.3, 0.5]" -->
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar color="themem">
         <ion-buttons slot="start">
           <ion-button color="success" @click="onSave">
             <ion-icon slot="start" :icon="checkmarkOutline"></ion-icon>
@@ -16,7 +16,7 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
+    <ion-content color="themel" class="ion-padding">
       <div class="w-full">
         <ion-label for="Usuario" position="floating">Buscar Usuario</ion-label> <br />
         <div class="search-input-group">

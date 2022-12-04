@@ -3,8 +3,7 @@
     <FormViolenciaModal ref="formViolenciaModelRef" @save="onSaveTipoViolencia"></FormViolenciaModal>
     <ion-loading :is-open="loadingTV" message="Cargando..."> </ion-loading>
     <div class="home-content">
-      <h2>LA VIOLENCIA</h2>
-      <img class="w-9" src="/SOS.jpg" />
+      <img class="w-9" src="/sos-ubic.png" />
       <h4>TIPOS DE VIOLENCIA</h4>
       <Carousel :value="tiposDeViolencia">
         <template #item="{ data }">

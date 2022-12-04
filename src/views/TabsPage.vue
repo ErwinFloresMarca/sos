@@ -7,7 +7,7 @@
     </ion-fab>
     <ion-tabs>
       <ion-router-outlet> </ion-router-outlet>
-      <ion-tab-bar slot="bottom">
+      <ion-tab-bar color="themed" slot="bottom">
         <ion-tab-button tab="tab1" href="/app/home">
           <ion-icon :icon="home" />
           <ion-label>Inicio</ion-label>

@@ -2,7 +2,7 @@
   <ion-modal :is-open="isOpen">
     <!-- :initial-breakpoint="0.3" :breakpoints="[0.3, 0.5]" -->
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar color="themem">
         <ion-buttons slot="start">
           <ion-button color="success" @click="onSave">
             <ion-icon slot="start" :icon="checkmarkOutline"></ion-icon>
@@ -16,7 +16,7 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
+    <ion-content color="themel" class="ion-padding">
       <div class="grid grid-nogutter">
         <div class="col-6">
           <ion-label for="Imagen" position="stacked">Imagen</ion-label>
@@ -48,7 +48,7 @@
       </ion-item>
       <ion-accordion-group class="mt-2">
         <ion-accordion value="first">
-          <ion-item slot="header" color="light">
+          <ion-item slot="header" color="themem">
             <ion-label>Ejemplos</ion-label>
           </ion-item>
           <div class="ion-padding" slot="content">
@@ -62,7 +62,7 @@
           </div>
         </ion-accordion>
         <ion-accordion value="second">
-          <ion-item slot="header" color="light">
+          <ion-item slot="header" color="themem">
             <ion-label>Pasos</ion-label>
           </ion-item>
           <div class="ion-padding" slot="content">
@@ -74,7 +74,7 @@
           </div>
         </ion-accordion>
         <ion-accordion value="third">
-          <ion-item slot="header" color="light">
+          <ion-item slot="header" color="themem">
             <ion-label>Contactos</ion-label>
           </ion-item>
           <div class="ion-padding" slot="content">

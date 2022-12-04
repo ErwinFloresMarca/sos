@@ -1,7 +1,7 @@
 <template>
   <ion-page>
     <form-linea-modal ref="formLineaModalRef" tipo="EMERGENCIA" @save="onSaveLinea"></form-linea-modal>
-    <ion-content class="ion-padding">
+    <ion-content color="themel" class="ion-padding">
       <div class="header-linea-emergencia">
         <h2 class="text-center">Lineas de emergencia</h2>
         <div class="text-center">

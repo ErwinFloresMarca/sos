@@ -1,25 +1,25 @@
 <template>
   <ion-page>
-    <ion-content v-if="tipoViolencia" class="ion-padding container-tipo-violencia">
+    <ion-content color="themel" v-if="tipoViolencia" class="ion-padding container-tipo-violencia">
       <h4>{{ tipoViolencia.titulo }}</h4>
       <img class="w-full img-tipo-violencia" :src="fileApi.downloadUrl(tipoViolencia.img)" alt="error" />
       <div class="w-full ql-editor" style="height: fit-content" v-html-safe="tipoViolencia.descripcion"></div>
       <ion-accordion-group class="mt-2">
         <ion-accordion value="first">
-          <ion-item slot="header" color="light">
+          <ion-item slot="header" color="themem">
             <ion-label>Ejemplos</ion-label>
           </ion-item>
-          <div class="ion-padding" slot="content">
+          <div slot="content">
             <ul>
               <li v-for="(ejem, idx) in tipoViolencia.ejemplos" :key="`ejemplo-${idx}`">{{ ejem }}</li>
             </ul>
           </div>
         </ion-accordion>
         <ion-accordion value="second">
-          <ion-item slot="header" color="light">
+          <ion-item slot="header" color="themem">
             <ion-label>Pasos</ion-label>
           </ion-item>
-          <div class="ion-padding" slot="content">
+          <div slot="content">
             <CardPaso
               v-for="(paso, idx) in tipoViolencia.pasos"
               :key="`paso-${idx}`"
@@ -29,10 +29,10 @@
           </div>
         </ion-accordion>
         <ion-accordion value="third">
-          <ion-item slot="header" color="light">
+          <ion-item slot="header" color="themem">
             <ion-label>Contactos</ion-label>
           </ion-item>
-          <div class="ion-padding" slot="content">
+          <div slot="content">
             <CardContacto
               v-for="(contacto, idx) in tipoViolencia.contactos"
               :key="`paso-${idx}`"
