@@ -39,7 +39,7 @@ import {
   IonInput,
   IonIcon,
 } from '@ionic/vue';
-import { closeOutline, logInOutline, timeOutline } from 'ionicons/icons';
+import { logInOutline } from 'ionicons/icons';
 import { ref } from 'vue';
 
 const data = ref<{ username?: string; password?: string }>({});

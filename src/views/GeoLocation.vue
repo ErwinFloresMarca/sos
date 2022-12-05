@@ -54,7 +54,6 @@ import {
 import { computed, onMounted } from 'vue';
 import { closeOutline, locateOutline } from 'ionicons/icons';
 import { useGeoLocation } from '@/composables/geoLocation.composable';
-import { DateTime } from 'luxon';
 import CardPosition from './parientes/rastreos/components/CardPosition.vue';
 
 const { currentPosition, mapKey, startGeoLocation, stopGeoLocation, isActiveGeoLocation, registerPositions } =
