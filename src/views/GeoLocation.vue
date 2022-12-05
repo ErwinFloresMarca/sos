@@ -18,14 +18,13 @@
           <ion-item slot="header" color="themem">
             <ion-label>Puntos</ion-label>
           </ion-item>
-          <div class="ion-padding" slot="content">
+          <div slot="content">
             <div
               v-for="(rp, idx) in registerPositions"
               :key="`pos-${idx}`"
               class="flex flex-wrap justify-content-between"
             >
-              <span>{{ idx + 1 }}.-</span>
-              <span>{{ DateTime.fromISO(rp.createdAt).toFormat('yyyy-LL-dd HH:mm:ss') }}</span>
+              <CardPosition :position="rp" class="w-full"></CardPosition>
             </div>
           </div>
         </ion-accordion>
@@ -56,6 +55,7 @@ import { computed, onMounted } from 'vue';
 import { closeOutline, locateOutline } from 'ionicons/icons';
 import { useGeoLocation } from '@/composables/geoLocation.composable';
 import { DateTime } from 'luxon';
+import CardPosition from './parientes/rastreos/components/CardPosition.vue';
 
 const { currentPosition, mapKey, startGeoLocation, stopGeoLocation, isActiveGeoLocation, registerPositions } =
   useGeoLocation();

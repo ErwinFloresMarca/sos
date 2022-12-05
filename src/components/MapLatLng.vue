@@ -92,7 +92,7 @@ export default {
 
     const initMap = () => {
       //Atributtions
-      const attributions = '<span>&copy; free map</span> ';
+      const attributions = '<span>&copy; OpenLayers</span> ';
 
       // Init variables
       const cord = fromLonLat([props.modelValue.lng, props.modelValue.lat]);

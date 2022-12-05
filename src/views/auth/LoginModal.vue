@@ -9,7 +9,7 @@
           </ion-button>
         </ion-buttons>
         <ion-buttons slot="end">
-          <ion-button color="danger" @click="cancel()">CANCELAR</ion-button>
+          <ion-button color="warning" @click="cancel()"><strong>CANCELAR</strong></ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -39,7 +39,7 @@ import {
   IonInput,
   IonIcon,
 } from '@ionic/vue';
-import { logInOutline } from 'ionicons/icons';
+import { closeOutline, logInOutline, timeOutline } from 'ionicons/icons';
 import { ref } from 'vue';
 
 const data = ref<{ username?: string; password?: string }>({});

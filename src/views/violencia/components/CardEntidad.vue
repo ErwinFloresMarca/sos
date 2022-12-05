@@ -55,7 +55,7 @@ const tootgleShow = () => {
 <style scoped>
 .card-entidad {
   border: 3px solid rgb(150, 213, 230);
-  border-radius: 5px;
+  border-radius: 10px;
 }
 .entidad-header {
   display: flex;
@@ -64,5 +64,10 @@ const tootgleShow = () => {
   cursor: pointer;
   background-color: rgb(180, 248, 255);
   padding: 5px;
+}
+.entidad-content {
+  padding: 10px;
+  color: white;
+  background-color: rgba(56, 10, 46, 0.7);
 }
 </style>
